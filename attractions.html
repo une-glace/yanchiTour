@@ -37,6 +37,22 @@
   </footer>
 
   <script>
+    const header = document.querySelector(".site-header");
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener("scroll", () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY;
+
+      if (currentY > 80 && delta > 0) {
+        header.classList.add("site-header--hidden");
+      } else if (delta < 0 || currentY <= 80) {
+        header.classList.remove("site-header--hidden");
+      }
+
+      lastScrollY = currentY;
+    });
+
     const attractions = [
       {
         id: "nujiang-bend",
@@ -143,4 +159,3 @@
   </script>
 </body>
 </html>
-

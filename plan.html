@@ -34,6 +34,23 @@
     <div>怒江流域旅游导览 · 行程页面占位</div>
     <div class="footer-sub">可拓展为完整的行程推荐与管理功能</div>
   </footer>
+
+  <script>
+    const header = document.querySelector(".site-header");
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener("scroll", () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY;
+
+      if (currentY > 80 && delta > 0) {
+        header.classList.add("site-header--hidden");
+      } else if (delta < 0 || currentY <= 80) {
+        header.classList.remove("site-header--hidden");
+      }
+
+      lastScrollY = currentY;
+    });
+  </script>
 </body>
 </html>
-
