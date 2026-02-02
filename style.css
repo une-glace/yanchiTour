@@ -72,7 +72,7 @@ main {
   margin-top: 0;
   border-radius: 0;
   overflow: hidden;
-  background: #111827;
+  position: relative;
   color: #f9fafb;
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.25);
 }
@@ -131,10 +131,13 @@ main {
 }
 
 .hero-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
   display: flex;
   justify-content: center;
   gap: 8px;
-  padding: 10px 12px 14px;
 }
 
 .hero-dot {
@@ -316,8 +319,9 @@ main {
 .follow-grid {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 240px));
   gap: 16px;
+  justify-content: center;
 }
 
 .follow-card {
@@ -325,10 +329,54 @@ main {
   border-radius: 18px;
   padding: 14px 16px 16px;
   box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.follow-front,
+.follow-qr {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
+}
+
+.follow-qr {
+  position: absolute;
+  inset: 14px 16px 16px;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.follow-front {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.follow-card:hover .follow-front {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.follow-card:hover .follow-qr {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.follow-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.follow-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
 }
 
 .qr-placeholder {
