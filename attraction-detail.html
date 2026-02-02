@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>景点详情 - 怒江流域旅游导览</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-title">
+      <span class="site-title-main" id="page-title-main">景点详情</span>
+      <span class="site-title-sub" id="page-title-sub">怒江流域示例景点介绍</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="breadcrumbs">
+      <a href="index.html">首页</a>
+      <span class="breadcrumbs-sep">/</span>
+      <a href="attractions.html">景点</a>
+      <span class="breadcrumbs-sep">/</span>
+      <span id="breadcrumbs-current">详情</span>
+    </section>
+
+    <section class="detail-hero">
+      <div class="detail-carousel">
+        <div class="detail-image-wrapper">
+          <img id="detail-hero-image" src="" alt="景点图片">
+          <div class="detail-hero-overlay">
+            <h1 id="detail-name">景点名称</h1>
+            <div class="detail-location" id="detail-location">位置</div>
+          </div>
+        </div>
+        <div class="detail-dots" id="detail-dots"></div>
+      </div>
+    </section>
+
+    <section class="detail-content">
+      <div class="detail-section">
+        <h2>概览</h2>
+        <p id="detail-overview"></p>
+      </div>
+      <div class="detail-section">
+        <h2>历史与人文</h2>
+        <p id="detail-history"></p>
+      </div>
+      <div class="detail-section">
+        <h2>地理位置与环境</h2>
+        <p id="detail-geo"></p>
+      </div>
+      <div class="detail-section">
+        <h2>特色体验与特产</h2>
+        <p id="detail-feature"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>怒江流域旅游导览 · 景点详情示例</div>
+    <div class="footer-sub">文字为示例说明，图片为随机占位图</div>
+  </footer>
+
+  <script>
+    const detailData = {
+      "nujiang-bend": {
+        name: "怒江第一湾",
+        location: "贡山附近江段",
+        overview: "怒江在这里绕出一个优美的大弯，江水在高山之间缓缓转折，形成极具辨识度的地貌景观。站在观景点向下眺望，江面与河谷在视野中交织出丰富的层次感。",
+        history: "随着公路交通的完善，这一江湾逐渐为更多游客所熟知，成为记录怒江风光的重要符号。当地居民也在沿岸发展起观景台与小型服务点，形成以观景为主的旅游带。",
+        geo: "怒江第一湾位于峡谷相对开阔的河段，两侧山体高差明显，河道在地形作用下发生大幅度拐弯。晴朗天气中，山体、江水与天空在这里汇聚成极具张力的画面。",
+        feature: "在这里可以体验俯瞰江湾的震撼视角，也是拍摄日出、云海和夜空的热门地点。周边村落还保留着相对完整的生活方式，可以顺路感受当地的民族文化与农作景观。",
+        images: ["bend-1", "bend-2", "bend-3"]
+      },
+      "nujiang-gorge": {
+        name: "怒江大峡谷",
+        location: "六库至贡山一线",
+        overview: "怒江大峡谷以深切的河谷地貌著称，江水在狭窄的峡谷间急速奔流，两岸山体陡峭挺拔，构成极具力量感的景观走廊。",
+        history: "长期以来，这里既是交通通道，又是民族交流的重要纽带。随着旅游业的发展，人们开始以更舒适、更安全的方式去感受这条峡谷的壮阔与多样。",
+        geo: "峡谷段地形起伏剧烈，河道落差较大，形成丰富多变的水流形态。雨季时水量充沛，江面更加汹涌，旱季则可以清晰看见江岸岩层与不同颜色的沉积物。",
+        feature: "驾车或乘车穿行其间，可以在沿线不同观景点短暂停留，感受峡谷在不同高度、不同角度呈现出来的景象。一路上还能看到村落、梯田与宗教建筑与自然景观交织在一起。",
+        images: ["gorge-1", "gorge-2", "gorge-3"]
+      },
+      "nujiang-village": {
+        name: "峡谷村落观景点",
+        location: "沿江典型村落带",
+        overview: "散布在峡谷中的村落以木屋为主，与山形地势紧密贴合，梯田、房舍与江水共同构成柔和而充满生活气息的画面。",
+        history: "不同民族在这里长期繁衍生息，形成了多元的文化与信仰传统。村落空间的布局与建筑形式，深受自然环境和生产生活方式的影响。",
+        geo: "村落多分布在相对稳定的缓坡或台地上，一侧背靠山体，一侧面向江谷，既便于生活生产，又能减少自然灾害的影响。",
+        feature: "可以在观景平台远眺村落整体风貌，也可以步行进入其间，感受梯田、小径与木屋之间的细节变化。根据季节不同，还能看到不同的农作景象。",
+        images: ["village-1", "village-2", "village-3"]
+      },
+      "nujiang-bridge": {
+        name: "江面索桥体验点",
+        location: "江段过江通道",
+        overview: "索桥横跨在汹涌的江面之上，是连接两岸的重要通道，也是观察江面视角的独特位置。",
+        history: "在交通条件较为有限的时期，过江工具主要依赖溜索与索桥。如今，部分索桥保留了下来，成为体验当地传统交通方式的重要载体。",
+        geo: "索桥一般架设在峡谷稍微开阔、两岸岩体较为稳定的地段，便于固定桥身并保证相对安全。",
+        feature: "站在桥上可以直接感受江风与水声，也能从近距离观察江水流速与水色变化。适合短暂停留拍照，但需要注意桥上人流与安全提示。",
+        images: ["bridge-1", "bridge-2", "bridge-3"]
+      },
+      "nujiang-terrace": {
+        name: "高山梯田观景平台",
+        location: "山腰开阔地带",
+        overview: "整齐的梯田顺着山势一层层铺展开来，与远处的山谷和江水相呼应，形成极具节奏感的景观。",
+        history: "梯田是当地居民在长期耕作过程中逐步修筑而成的成果，体现了因地制宜的发展方式和与山地环境的长期互动。",
+        geo: "梯田多分布在光照条件较好、土壤较为稳定的山坡上，通过一道道田埂划分出层次分明的耕作空间。",
+        feature: "在不同季节，梯田呈现出完全不同的颜色与质感。观景平台可以从中远距离欣赏整体纹理，也可以选择在村落小径间穿行，感受田间的气息。",
+        images: ["terrace-1", "terrace-2", "terrace-3"]
+      },
+      "nujiang-cloudsea": {
+        name: "云海观景台",
+        location: "高海拔山脊",
+        overview: "在天气条件合适时，观景台周围云海翻腾，山峰时隐时现，怒江与群山在云雾间构成梦幻般的景象。",
+        history: "随着观景设施的完善，这里成为观日出与云海的重要据点，吸引了大量摄影爱好者与徒步爱好者前来驻足。",
+        geo: "观景台位于山脊或山顶附近，视野开阔，可以俯瞰周边多条山谷与河流，云层在不同高度穿插其间。",
+        feature: "清晨可等待日出，夜晚则适合观星。云海消散时，还能清晰看到远处的山体线条与河谷轮廓，适合长时间停留慢慢观察景观变化。",
+        images: ["cloudsea-1", "cloudsea-2", "cloudsea-3"]
+      }
+    };
+
+    function getQueryId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("id");
+    }
+
+    function getImageUrl(seed) {
+      return "https://picsum.photos/960/540?random=" + encodeURIComponent("nujiang-" + seed);
+    }
+
+    const heroImage = document.getElementById("detail-hero-image");
+    const dotsContainer = document.getElementById("detail-dots");
+    const nameEl = document.getElementById("detail-name");
+    const locationEl = document.getElementById("detail-location");
+    const pageTitleMain = document.getElementById("page-title-main");
+    const pageTitleSub = document.getElementById("page-title-sub");
+    const breadcrumbsCurrent = document.getElementById("breadcrumbs-current");
+    const overviewEl = document.getElementById("detail-overview");
+    const historyEl = document.getElementById("detail-history");
+    const geoEl = document.getElementById("detail-geo");
+    const featureEl = document.getElementById("detail-feature");
+
+    let currentImages = [];
+    let currentImageIndex = 0;
+    let detailTimer = null;
+
+    function buildDots() {
+      dotsContainer.innerHTML = "";
+      currentImages.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.className = "detail-dot";
+        dot.type = "button";
+        dot.addEventListener("click", () => {
+          currentImageIndex = index;
+          updateHeroImage();
+          resetDetailTimer();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function updateHeroImage() {
+      const seed = currentImages[currentImageIndex];
+      heroImage.src = getImageUrl(seed);
+      Array.from(dotsContainer.children).forEach((dot, index) => {
+        if (index === currentImageIndex) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
+        }
+      });
+    }
+
+    function startDetailTimer() {
+      detailTimer = setInterval(() => {
+        currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+        updateHeroImage();
+      }, 5000);
+    }
+
+    function resetDetailTimer() {
+      if (detailTimer) {
+        clearInterval(detailTimer);
+      }
+      startDetailTimer();
+    }
+
+    function renderDetail() {
+      const id = getQueryId();
+      const data = detailData[id] || detailData["nujiang-bend"];
+      nameEl.textContent = data.name;
+      locationEl.textContent = data.location;
+      pageTitleMain.textContent = data.name;
+      pageTitleSub.textContent = "怒江流域景点详细介绍示例";
+      breadcrumbsCurrent.textContent = data.name;
+      overviewEl.textContent = data.overview;
+      historyEl.textContent = data.history;
+      geoEl.textContent = data.geo;
+      featureEl.textContent = data.feature;
+
+      currentImages = data.images.slice();
+      currentImageIndex = 0;
+      buildDots();
+      updateHeroImage();
+      startDetailTimer();
+    }
+
+    renderDetail();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>怒江流域旅游导览</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-title">
+      <span class="site-title-main">怒江流域旅游导览</span>
+      <span class="site-title-sub">你的怒江旅行小助手</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-carousel">
+      <div class="hero-image-wrapper">
+        <img id="hero-image" src="" alt="怒江流域风景">
+        <div class="hero-overlay">
+          <div class="hero-tag">滚动风景展示</div>
+          <h1 id="hero-title">怒江流域的壮丽与宁静</h1>
+          <p id="hero-desc">穿越峡谷与云海，遇见怒江的每一种色彩。</p>
+        </div>
+      </div>
+      <div class="hero-dots" id="hero-dots"></div>
+    </section>
+
+    <section class="quick-nav">
+      <h2 class="section-title">快速导览</h2>
+      <p class="section-subtitle">一键直达你关心的内容</p>
+      <div class="nav-grid">
+        <a class="nav-item" href="attractions.html">
+          <div class="nav-icon nav-icon-1"></div>
+          <div class="nav-text-main">景点</div>
+          <div class="nav-text-sub">看山看水看峡谷</div>
+        </a>
+        <a class="nav-item" href="food.html">
+          <div class="nav-icon nav-icon-2"></div>
+          <div class="nav-text-main">美食</div>
+          <div class="nav-text-sub">品味怒江味道</div>
+        </a>
+        <a class="nav-item" href="stay.html">
+          <div class="nav-icon nav-icon-3"></div>
+          <div class="nav-text-main">住宿</div>
+          <div class="nav-text-sub">找到安心落脚处</div>
+        </a>
+        <a class="nav-item" href="transport.html">
+          <div class="nav-icon nav-icon-4"></div>
+          <div class="nav-text-main">交通</div>
+          <div class="nav-text-sub">规划进出与沿线交通</div>
+        </a>
+        <a class="nav-item" href="plan.html">
+          <div class="nav-icon nav-icon-5"></div>
+          <div class="nav-text-main">行程</div>
+          <div class="nav-text-sub">定制你的怒江之旅</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="intro-section">
+      <h2 class="section-title">关于这个网站</h2>
+      <p class="intro-paragraph">
+        参考原有小程序的设计，这个网站同样以简洁直观的方式，为你提供怒江流域的旅游导览服务。
+        顶部是动态风景展示区域，下方是五个核心功能入口，分别对应景点、美食、住宿、交通和行程规划。
+      </p>
+      <p class="intro-paragraph">
+        在后续的页面中，你可以浏览示例景点卡片列表，进入具体景点介绍界面，查看包含多张图片的轮播展示、
+        以及景点的历史、地理位置与特色信息。当前版本以随机生成的占位图片代替真实素材，方便在没有正式图片时先搭建整体结构。
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>怒江流域旅游导览 · 示例网站</div>
+    <div class="footer-sub">图片由在线占位图服务随机生成，仅作展示结构使用</div>
+  </footer>
+
+  <script>
+    const heroData = [
+      {
+        title: "晨雾中的怒江峡谷",
+        desc: "清晨薄雾缭绕，山峦与江水在光影中交织。",
+        seed: "nujiang-morning"
+      },
+      {
+        title: "傍晚金色河谷",
+        desc: "夕阳洒落河谷，村落灯火初上，宁静而温暖。",
+        seed: "nujiang-sunset"
+      },
+      {
+        title: "高山云海之上",
+        desc: "站在山脊远眺，云海翻涌，怒江像一条银线穿梭其间。",
+        seed: "nujiang-clouds"
+      },
+      {
+        title: "峡谷中的村庄",
+        desc: "依山傍水的小村落，呈现人与自然共生的图景。",
+        seed: "nujiang-village"
+      }
+    ];
+
+    const heroImage = document.getElementById("hero-image");
+    const heroTitle = document.getElementById("hero-title");
+    const heroDesc = document.getElementById("hero-desc");
+    const heroDots = document.getElementById("hero-dots");
+
+    let heroIndex = 0;
+
+    function buildHeroDots() {
+      heroDots.innerHTML = "";
+      heroData.forEach((item, index) => {
+        const dot = document.createElement("button");
+        dot.className = "hero-dot";
+        dot.setAttribute("type", "button");
+        dot.addEventListener("click", () => {
+          heroIndex = index;
+          updateHero();
+          resetHeroTimer();
+        });
+        heroDots.appendChild(dot);
+      });
+    }
+
+    function updateHero() {
+      const item = heroData[heroIndex];
+      const url = "https://picsum.photos/1200/520?random=" + encodeURIComponent(item.seed);
+      heroImage.src = url;
+      heroTitle.textContent = item.title;
+      heroDesc.textContent = item.desc;
+
+      Array.from(heroDots.children).forEach((dot, index) => {
+        if (index === heroIndex) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
+        }
+      });
+    }
+
+    let heroTimer = null;
+
+    function startHeroTimer() {
+      heroTimer = setInterval(() => {
+        heroIndex = (heroIndex + 1) % heroData.length;
+        updateHero();
+      }, 5000);
+    }
+
+    function resetHeroTimer() {
+      if (heroTimer) {
+        clearInterval(heroTimer);
+      }
+      startHeroTimer();
+    }
+
+    buildHeroDots();
+    updateHero();
+    startHeroTimer();
+  </script>
+</body>
+</html>
+

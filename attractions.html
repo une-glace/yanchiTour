@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>怒江景点导览</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-title">
+      <span class="site-title-main">怒江景点导览</span>
+      <span class="site-title-sub">卡片列表式浏览怒江流域各处风景</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="breadcrumbs">
+      <a href="index.html">首页</a>
+      <span class="breadcrumbs-sep">/</span>
+      <span>景点</span>
+    </section>
+
+    <section class="list-header">
+      <h1 class="section-title">景点一览</h1>
+      <p class="section-subtitle">
+        这里展示怒江流域示例景点卡片。点击卡片可以进入到对应的详情介绍界面。
+      </p>
+    </section>
+
+    <section id="attraction-list" class="card-list"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div>怒江流域旅游导览 · 景点页面示例</div>
+    <div class="footer-sub">图片与内容均为示例占位，实际数据可后续替换</div>
+  </footer>
+
+  <script>
+    const attractions = [
+      {
+        id: "nujiang-bend",
+        name: "怒江第一湾",
+        location: "贡山附近江段",
+        tags: ["江湾风光", "摄影热门"],
+        summary: "江水在高山之间急转一个优美的大弯，阳光下水面折射出细腻的光泽，是怒江流域最具代表性的自然景观之一。"
+      },
+      {
+        id: "nujiang-gorge",
+        name: "怒江大峡谷",
+        location: "六库至贡山一线",
+        tags: ["峡谷地貌", "层峦叠嶂"],
+        summary: "高山从江岸陡然拔起，峡谷深邃而狭长，江水奔腾其间，形成独特的纵深感与力量感。"
+      },
+      {
+        id: "nujiang-village",
+        name: "峡谷村落观景点",
+        location: "沿江典型村落带",
+        tags: ["人文风貌", "民族聚居地"],
+        summary: "村落依山而建、面江而居，木屋与梯田顺着山势铺展开来，展现出人与自然共生的生活图景。"
+      },
+      {
+        id: "nujiang-bridge",
+        name: "江面索桥体验点",
+        location: "江段过江通道",
+        tags: ["过江体验", "江面视角"],
+        summary: "沿江分布的索桥连接两岸，不仅是当地居民日常通行的重要设施，也是体验怒江风力与水声的好地方。"
+      },
+      {
+        id: "nujiang-terrace",
+        name: "高山梯田观景平台",
+        location: "山腰开阔地带",
+        tags: ["梯田景观", "四季色彩"],
+        summary: "春看水面映天，夏看绿浪翻滚，秋观金黄稻谷，冬赏云雾缭绕，是四季皆宜的观景点。"
+      },
+      {
+        id: "nujiang-cloudsea",
+        name: "云海观景台",
+        location: "高海拔山脊",
+        tags: ["日出云海", "高处远眺"],
+        summary: "晴朗的清晨，可以在这里等待日出，远望云海翻涌，怒江与山脉在云雾间若隐若现。"
+      }
+    ];
+
+    function getCardImageUrl(index) {
+      const seed = "nujiang-card-" + index;
+      return "https://picsum.photos/480/280?random=" + encodeURIComponent(seed);
+    }
+
+    function renderCards() {
+      const container = document.getElementById("attraction-list");
+      attractions.forEach((item, index) => {
+        const card = document.createElement("a");
+        card.className = "attraction-card";
+        card.href = "attraction-detail.html?id=" + encodeURIComponent(item.id);
+
+        const imageWrapper = document.createElement("div");
+        imageWrapper.className = "card-image-wrapper";
+        const img = document.createElement("img");
+        img.src = getCardImageUrl(index);
+        img.alt = item.name;
+        imageWrapper.appendChild(img);
+
+        const body = document.createElement("div");
+        body.className = "card-body";
+
+        const titleRow = document.createElement("div");
+        titleRow.className = "card-title-row";
+        const title = document.createElement("h2");
+        title.className = "card-title";
+        title.textContent = item.name;
+        const location = document.createElement("div");
+        location.className = "card-location";
+        location.textContent = item.location;
+        titleRow.appendChild(title);
+        titleRow.appendChild(location);
+
+        const tags = document.createElement("div");
+        tags.className = "card-tags";
+        item.tags.forEach(tagText => {
+          const tag = document.createElement("span");
+          tag.className = "card-tag";
+          tag.textContent = tagText;
+          tags.appendChild(tag);
+        });
+
+        const summary = document.createElement("p");
+        summary.className = "card-summary";
+        summary.textContent = item.summary;
+
+        body.appendChild(titleRow);
+        body.appendChild(tags);
+        body.appendChild(summary);
+
+        card.appendChild(imageWrapper);
+        card.appendChild(body);
+
+        container.appendChild(card);
+      });
+    }
+
+    renderCards();
+  </script>
+</body>
+</html>
+
