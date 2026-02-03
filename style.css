@@ -198,6 +198,7 @@ main {
   gap: 14px;
   min-height: 320px;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  position: relative;
 }
 
 .nav-item:hover {
@@ -206,11 +207,13 @@ main {
 }
 
 .nav-icon {
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 104px;
   border-radius: 20px;
   background: linear-gradient(135deg, #4ade80, #22c55e);
-  position: relative;
+  position: absolute;
+  top: 24px;
+  right: 24px;
 }
 
 .nav-icon::after {
@@ -238,10 +241,12 @@ main {
 }
 
 .item_title {
-  font-size: 20px;
+  font-size: 32px;
+  line-height: 40px;
   font-weight: 700;
   color: #111827;
-  margin-top: 8px;
+  margin-top: 80px;
+  margin-bottom: 48px;
 }
 
 .nav-text-sub {
@@ -303,7 +308,7 @@ main {
 
 .reason-title {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 400;
   color: #111827;
 }
 
