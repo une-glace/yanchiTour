@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>怒江景点导览</title>
+  <title>盐池景点导览</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="site-title">
-      <span class="site-title-main">怒江景点导览</span>
-      <span class="site-title-sub">卡片列表式浏览怒江流域各处风景</span>
+      <span class="site-title-main">盐池景点导览</span>
+      <span class="site-title-sub">卡片列表式浏览盐池及周边的特色风光</span>
     </div>
   </header>
 
@@ -24,7 +24,7 @@
     <section class="list-header">
       <h1 class="section-title">景点一览</h1>
       <p class="section-subtitle">
-        这里展示怒江流域示例景点卡片。点击卡片可以进入到对应的详情介绍界面。
+        这里展示盐池及周边的示例景点卡片。点击卡片可以进入到对应的详情介绍界面。
       </p>
     </section>
 
@@ -32,7 +32,7 @@
   </main>
 
   <footer class="site-footer">
-    <div>怒江流域旅游导览 · 景点页面示例</div>
+    <div>盐池旅游导览 · 景点页面示例</div>
     <div class="footer-sub">图片与内容均为示例占位，实际数据可后续替换</div>
   </footer>
 
@@ -55,51 +55,51 @@
 
     const attractions = [
       {
-        id: "nujiang-bend",
-        name: "怒江第一湾",
-        location: "贡山附近江段",
-        tags: ["江湾风光", "摄影热门"],
-        summary: "江水在高山之间急转一个优美的大弯，阳光下水面折射出细腻的光泽，是怒江流域最具代表性的自然景观之一。"
+        id: "yanchi-habahulake",
+        name: "哈巴湖湿地公园",
+        location: "哈巴湖景区",
+        tags: ["湿地风光", "观鸟拍照"],
+        summary: "湖泊与草甸交织成片，候鸟在水面起落，是感受盐池生态之美的代表性景点。"
       },
       {
-        id: "nujiang-gorge",
-        name: "怒江大峡谷",
-        location: "六库至贡山一线",
-        tags: ["峡谷地貌", "层峦叠嶂"],
-        summary: "高山从江岸陡然拔起，峡谷深邃而狭长，江水奔腾其间，形成独特的纵深感与力量感。"
+        id: "yanchi-greatwall",
+        name: "盐池长城遗址群",
+        location: "盐池县境内长城沿线",
+        tags: ["长城文化", "历史遗迹"],
+        summary: "隋、明两代长城在这里叠加分布，残垣与烽火台勾勒出边塞防线的历史轮廓。"
       },
       {
-        id: "nujiang-village",
-        name: "峡谷村落观景点",
-        location: "沿江典型村落带",
-        tags: ["人文风貌", "民族聚居地"],
-        summary: "村落依山而建、面江而居，木屋与梯田顺着山势铺展开来，展现出人与自然共生的生活图景。"
+        id: "yanchi-yueerquan",
+        name: "月儿泉村河谷",
+        location: "月儿泉村一带",
+        tags: ["河谷景观", "露营徒步"],
+        summary: "河水、草地与古堡遗迹在同一条谷地相遇，适合露营、徒步与拍照打卡。"
       },
       {
-        id: "nujiang-bridge",
-        name: "江面索桥体验点",
-        location: "江段过江通道",
-        tags: ["过江体验", "江面视角"],
-        summary: "沿江分布的索桥连接两岸，不仅是当地居民日常通行的重要设施，也是体验怒江风力与水声的好地方。"
+        id: "yanchi-redmemorial",
+        name: "盐池革命历史纪念馆",
+        location: "县城城区",
+        tags: ["红色文化", "研学实践"],
+        summary: "通过文物、图片与多媒体展示盐池在革命年代的重要地位，是了解地方历史的必访之处。"
       },
       {
-        id: "nujiang-terrace",
-        name: "高山梯田观景平台",
-        location: "山腰开阔地带",
-        tags: ["梯田景观", "四季色彩"],
-        summary: "春看水面映天，夏看绿浪翻滚，秋观金黄稻谷，冬赏云雾缭绕，是四季皆宜的观景点。"
+        id: "yanchi-tanyangstreet",
+        name: "滩羊美食街区",
+        location: "县城核心街区",
+        tags: ["滩羊美食", "夜间氛围"],
+        summary: "集中了手抓羊肉、烤全羊等特色小吃，夜晚灯光亮起时最具烟火气息。"
       },
       {
-        id: "nujiang-cloudsea",
-        name: "云海观景台",
-        location: "高海拔山脊",
-        tags: ["日出云海", "高处远眺"],
-        summary: "晴朗的清晨，可以在这里等待日出，远望云海翻涌，怒江与山脉在云雾间若隐若现。"
+        id: "yanchi-grassland",
+        name: "花马湖草原风光带",
+        location: "花马湖周边区域",
+        tags: ["草原湖泊", "自驾路线"],
+        summary: "草原与湖面相互映照，自驾沿线视野开阔，是体验盐池广袤空间感的理想路线。"
       }
     ];
 
     function getCardImageUrl(index) {
-      const seed = "nujiang-card-" + index;
+      const seed = "yanchi-card-" + index;
       return "https://picsum.photos/480/280?random=" + encodeURIComponent(seed);
     }
 
