@@ -12,6 +12,15 @@
       <span class="site-title-main">盐池旅游导览</span>
       <span class="site-title-sub">你的盐池旅行小助手</span>
     </div>
+    <div class="search-container">
+      <input type="text" class="search-input" id="search-input" placeholder="搜索景点、住宿...">
+      <button class="search-button" id="search-button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <section class="hero-carousel">
@@ -25,6 +34,11 @@
       <button class="carousel-arrow carousel-arrow-right" id="hero-next" type="button">&#8250;</button>
     </div>
     <div class="hero-dots" id="hero-dots"></div>
+  </section>
+
+  <section id="search-results" class="search-results-section" style="display: none;">
+    <div class="content_title">搜索结果</div>
+    <div id="search-results-list" class="search-results-list"></div>
   </section>
 
   <main>
@@ -281,6 +295,335 @@
     buildHeroDots();
     updateHero();
     startHeroTimer();
+
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button");
+    const searchResultsSection = document.getElementById("search-results");
+    const searchResultsList = document.getElementById("search-results-list");
+
+    const database = [
+      {
+        id: "yanchi-habahulake",
+        type: "attraction",
+        name: "哈巴湖湿地公园",
+        location: "哈巴湖景区",
+        tags: ["湿地风光", "观鸟拍照"],
+        summary: "湖泊与草甸交织成片，候鸟在水面起落，是感受盐池生态之美的代表性景点。",
+        url: "attraction-detail.html?id=yanchi-habahulake"
+      },
+      {
+        id: "yanchi-greatwall",
+        type: "attraction",
+        name: "盐池长城遗址群",
+        location: "盐池县境内长城沿线",
+        tags: ["长城文化", "历史遗迹"],
+        summary: "隋、明两代长城在这里叠加分布，残垣与烽火台勾勒出边塞防线的历史轮廓。",
+        url: "attraction-detail.html?id=yanchi-greatwall"
+      },
+      {
+        id: "yanchi-yueerquan",
+        type: "attraction",
+        name: "月儿泉村河谷",
+        location: "月儿泉村一带",
+        tags: ["河谷景观", "露营徒步"],
+        summary: "河水、草地与古堡遗迹在同一条谷地相遇，适合露营、徒步与拍照打卡。",
+        url: "attraction-detail.html?id=yanchi-yueerquan"
+      },
+      {
+        id: "yanchi-redmemorial",
+        type: "attraction",
+        name: "盐池革命历史纪念馆",
+        location: "县城城区",
+        tags: ["红色文化", "研学实践"],
+        summary: "通过文物、图片与多媒体展示盐池在革命年代的重要地位，是了解地方历史的必访之处。",
+        url: "attraction-detail.html?id=yanchi-redmemorial"
+      },
+      {
+        id: "yanchi-tanyangstreet",
+        type: "attraction",
+        name: "滩羊美食街区",
+        location: "县城核心街区",
+        tags: ["滩羊美食", "夜间氛围"],
+        summary: "集中了手抓羊肉、烤全羊等特色小吃，夜晚灯光亮起时最具烟火气息。",
+        url: "attraction-detail.html?id=yanchi-tanyangstreet"
+      },
+      {
+        id: "yanchi-grassland",
+        type: "attraction",
+        name: "花马湖草原风光带",
+        location: "花马湖周边区域",
+        tags: ["草原湖泊", "自驾路线"],
+        summary: "草原与湖面相互映照，自驾沿线视野开阔，是体验盐池广袤空间感的理想路线。",
+        url: "attraction-detail.html?id=yanchi-grassland"
+      },
+      {
+        id: "yanchi-chunxue",
+        type: "attraction",
+        name: "春雪文化产业园",
+        location: "盐池县东顺工业园区",
+        tags: ["非遗传承", "乡村旅游", "研学教育"],
+        summary: "集非遗传承、乡村旅游与产业融合发展的综合性园区，包含滩羊皮工艺画制作、荞麦壳养生耳枕生产等非遗项目，建有枕头文化馆、民俗文化馆等展馆设施，2021年底获批AA级旅游景区资质。",
+        url: "attraction-detail.html?id=yanchi-chunxue"
+      },
+      {
+        id: "yanchi-cultural",
+        type: "attraction",
+        name: "盐池县文化馆",
+        location: "盐池县城",
+        tags: ["公共文化", "非遗传承", "免费开放"],
+        summary: "承担公共文化服务职能的县级文化设施，2021年11月被纳入全国一级文化馆公示名单，通过组织文艺展演、非遗传承、免费培训等活动满足群众文化需求。",
+        url: "attraction-detail.html?id=yanchi-cultural"
+      },
+      {
+        id: "yanchi-greatwall-museum",
+        type: "attraction",
+        name: "长城关博物馆",
+        location: "盐池县盐州古城4A旅游景区",
+        tags: ["长城文化", "博物馆", "历史遗迹"],
+        summary: "以长城为主题内容的专题性博物馆，坐落于中国万里长城中唯一以'长城'而命名的关隘长城关脚下，现有东西两个展厅共4200平方米。",
+        url: "attraction-detail.html?id=yanchi-greatwall-museum"
+      },
+      {
+        id: "yanchi-hotel",
+        type: "food",
+        name: "盐池宾馆",
+        location: "盐池县花马东街1号",
+        tags: ["中华餐饮名店", "滩羊美食", "星级酒店"],
+        summary: "盐池宾馆是一家融餐饮、住宿于一体的旅游饭店，提供烤全羊、酸汤羊腿、汗蒸羊排等特色菜肴，先后被评为'中华餐饮名店'、'宁夏餐饮名店'等荣誉称号。",
+        url: "food-detail.html?id=yanchi-hotel"
+      },
+      {
+        id: "yanchi-fuhai",
+        type: "food",
+        name: "盐池福海大酒店",
+        location: "盐池县花马池西街303号",
+        tags: ["高星级酒店", "商务会议", "滩羊美食"],
+        summary: "盐池福海大酒店是一家集住宿、餐饮、商务、会议、旅游等功能为一体的国家高星级旅游饭店，位于县城核心区域，位置优越，交通便利。",
+        url: "food-detail.html?id=yanchi-fuhai"
+      },
+      {
+        id: "yanchi-junhao",
+        type: "food",
+        name: "盐池君豪酒店",
+        location: "盐池县花马池西街北侧",
+        tags: ["智能化酒店", "商务酒店", "滩羊美食"],
+        summary: "盐池君豪酒店是按照国家星级标准投资建设的高端智能化商务酒店，地理位置优越，交通便利，是您在盐池旅游、出差期间的理想选择。",
+        url: "food-detail.html?id=yanchi-junhao"
+      },
+      {
+        id: "yanchi-xiaobang",
+        type: "food",
+        name: "盐池潇邦酒店",
+        location: "盐池县",
+        tags: ["舒适住宿", "便捷出行", "滩羊美食"],
+        summary: "盐池潇邦酒店提供舒适的住宿环境，位置便利，适合自驾游客，周边餐饮选择丰富。",
+        url: "food-detail.html?id=yanchi-xiaobang"
+      },
+      {
+        id: "yanchi-xian",
+        type: "food",
+        name: "盐池希岸酒店",
+        location: "盐池县",
+        tags: ["精品酒店", "宠爱文化", "贴心服务"],
+        summary: "希岸酒店是锦江酒店旗下一个定位为时尚轻者跨界精品的酒店品牌，以'小幸感，宠你开始'为核心价值主张，为宾客提供贴心服务。",
+        url: "food-detail.html?id=yanchi-xian"
+      }
+    ];
+
+    function tokenize(text) {
+      const result = [];
+      let current = "";
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        if (char >= "\u4e00" && char <= "\u9fff") {
+          if (current) {
+            result.push(current.toLowerCase());
+            current = "";
+          }
+          result.push(char);
+        } else if (char >= "a" && char <= "z" || char >= "A" && char <= "Z" || char >= "0" && char <= "9") {
+          current += char.toLowerCase();
+        } else {
+          if (current) {
+            result.push(current.toLowerCase());
+            current = "";
+          }
+        }
+      }
+      if (current) {
+        result.push(current.toLowerCase());
+      }
+      return result;
+    }
+
+    class BM25 {
+      constructor(documents, k1 = 1.2, b = 0.75) {
+        this.k1 = k1;
+        this.b = b;
+        this.documents = documents;
+        this.corpus = documents.map(doc => this.extractText(doc));
+        this.idf = {};
+        this.docLengths = [];
+        this.avgDocLength = 0;
+        this.buildIndex();
+      }
+
+      extractText(doc) {
+        const fields = [doc.name, doc.summary, doc.location, ...doc.tags].join(" ");
+        return fields;
+      }
+
+      buildIndex() {
+        const N = this.corpus.length;
+        let totalLength = 0;
+        const docTermFreqs = [];
+
+        this.corpus.forEach(text => {
+          const tokens = tokenize(text);
+          const termFreq = {};
+          tokens.forEach(token => {
+            termFreq[token] = (termFreq[token] || 0) + 1;
+          });
+          docTermFreqs.push(termFreq);
+          this.docLengths.push(tokens.length);
+          totalLength += tokens.length;
+        });
+
+        this.avgDocLength = totalLength / N;
+
+        const df = {};
+        docTermFreqs.forEach(termFreq => {
+          Object.keys(termFreq).forEach(term => {
+            df[term] = (df[term] || 0) + 1;
+          });
+        });
+
+        Object.keys(df).forEach(term => {
+          this.idf[term] = Math.log((N - df[term] + 0.5) / (df[term] + 0.5) + 1);
+        });
+
+        this.docTermFreqs = docTermFreqs;
+      }
+
+      search(query, limit = 10) {
+        const queryTokens = tokenize(query);
+        const scores = [];
+
+        this.documents.forEach((doc, docIndex) => {
+          let score = 0;
+          const termFreq = this.docTermFreqs[docIndex];
+          const docLength = this.docLengths[docIndex];
+
+          queryTokens.forEach(token => {
+            const freq = termFreq[token] || 0;
+            if (freq > 0) {
+              const idf = this.idf[token] || 0;
+              const numerator = freq * (this.k1 + 1);
+              const denominator = freq + this.k1 * (1 - this.b + this.b * docLength / this.avgDocLength);
+              score += idf * numerator / denominator;
+            }
+          });
+
+          if (score > 0) {
+            scores.push({ document: doc, score: score });
+          }
+        });
+
+        scores.sort((a, b) => b.score - a.score);
+        return scores.slice(0, limit);
+      }
+    }
+
+    const bm25 = new BM25(database);
+
+    function getTypeLabel(type) {
+      const labels = {
+        attraction: "景点",
+        stay: "住宿",
+        food: "美食"
+      };
+      return labels[type] || type;
+    }
+
+    function renderSearchResults(results) {
+      searchResultsList.innerHTML = "";
+
+      if (results.length === 0) {
+        searchResultsList.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #6b7280;">
+            <p>未找到相关结果</p>
+          </div>
+        `;
+        return;
+      }
+
+      results.forEach(result => {
+        const doc = result.document;
+        const item = document.createElement("div");
+        item.className = "search-result-item";
+        item.onclick = () => {
+          window.location.href = doc.url;
+        };
+
+        const typeLabel = document.createElement("span");
+        typeLabel.className = `search-result-type ${doc.type}`;
+        typeLabel.textContent = getTypeLabel(doc.type);
+
+        const title = document.createElement("div");
+        title.className = "search-result-title";
+        title.textContent = doc.name;
+
+        const summary = document.createElement("div");
+        summary.className = "search-result-summary";
+        summary.textContent = doc.summary;
+
+        const meta = document.createElement("div");
+        meta.className = "search-result-meta";
+
+        const location = document.createElement("div");
+        location.className = "search-result-location";
+        location.textContent = doc.location;
+
+        const tags = document.createElement("div");
+        tags.textContent = doc.tags.join(" · ");
+
+        meta.appendChild(location);
+        meta.appendChild(tags);
+
+        item.appendChild(typeLabel);
+        item.appendChild(title);
+        item.appendChild(summary);
+        item.appendChild(meta);
+
+        searchResultsList.appendChild(item);
+      });
+    }
+
+    function performSearch() {
+      const query = searchInput.value.trim();
+      if (!query) {
+        searchResultsSection.style.display = "none";
+        return;
+      }
+
+      const results = bm25.search(query, 20);
+      renderSearchResults(results);
+      searchResultsSection.style.display = "block";
+    }
+
+    searchButton.addEventListener("click", performSearch);
+
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        performSearch();
+      }
+    });
+
+    searchInput.addEventListener("input", () => {
+      if (searchInput.value.trim() === "") {
+        searchResultsSection.style.display = "none";
+      }
+    });
   </script>
 </body>
 </html>

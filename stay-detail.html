@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>住宿详情 - 盐池旅游导览</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-title">
+      <span class="site-title-main" id="page-title-main">住宿详情</span>
+      <span class="site-title-sub" id="page-title-sub">盐池特色住宿场所详细信息</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="breadcrumbs">
+      <a href="index.html">首页</a>
+      <span class="breadcrumbs-sep">/</span>
+      <a href="stay.html">住宿</a>
+      <span class="breadcrumbs-sep">/</span>
+      <span id="breadcrumbs-current">详情</span>
+    </section>
+
+    <section class="detail-hero">
+      <div class="detail-carousel">
+        <div class="detail-image-wrapper">
+          <img id="detail-hero-image" src="" alt="住宿图片">
+          <div class="detail-hero-overlay">
+            <h1 id="detail-name">住宿名称</h1>
+            <div class="detail-location" id="detail-location">位置</div>
+          </div>
+        </div>
+        <div class="detail-dots" id="detail-dots"></div>
+      </div>
+    </section>
+
+    <section class="detail-content">
+      <div class="detail-section">
+        <h2>概览</h2>
+        <p id="detail-overview"></p>
+      </div>
+      <div class="detail-section">
+        <h2>详细介绍</h2>
+        <p id="detail-introduction"></p>
+      </div>
+      <div class="detail-section">
+        <h2>用户评价</h2>
+        <div id="detail-comments"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>盐池旅游导览 · 住宿详情页</div>
+    <div class="footer-sub">展示盐池特色住宿场所详细信息</div>
+  </footer>
+
+  <script>
+    const header = document.querySelector(".site-header");
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener("scroll", () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY;
+
+      if (currentY > 80 && delta > 0) {
+        header.classList.add("site-header--hidden");
+      } else if (delta < 0 || currentY <= 80) {
+        header.classList.remove("site-header--hidden");
+      }
+
+      lastScrollY = currentY;
+    });
+
+    const detailData = {
+      "yanchi-hotel": {
+        name: "盐池宾馆",
+        location: "盐池县花马东街1号",
+        tags: ["中华餐饮名店", "滩羊美食", "星级酒店"],
+        overview: "盐池宾馆是一家融餐饮、住宿于一体的旅游饭店，提供烤全羊、酸汤羊腿、汗蒸羊排等特色菜肴，先后被评为'中华餐饮名店'、'宁夏餐饮名店'等荣誉称号。",
+        introduction: "介绍：宾馆是一家融餐饮、住宿于一体的***旅游饭店，位于宁夏吴忠市盐池县花马东街1号，近中心商厦；周围餐饮、娱乐等生活配套齐全，出行便利。宾馆拥有多种房型，共有客房八十余间，小型会议厅2个，多功能会议厅1个，回、汉餐厅，共有雅座20间，多功能宴会厅2个，特色餐厅1个，可容纳900人同时就餐。宾馆于2021年6月对北楼的所有客房进行了整体装修。这里提供的特色菜肴有烤全羊（中国名菜）、酸汤羊腿（中国名菜）、汗蒸羊排（中国名菜）、盐池奶皮（中国名点）、盐池凉粉（中华名小吃）、面蒸羊羔肉、清炖羊肉、爆炒羊羔肉、手工剁荞面、软黄米糕角角、农家炖滩鸡、炒土鸡蛋等。宾馆秉诚'宾客至上、服务**'的宗旨，全力打造盐池酒店服务品牌，先后被评为'全国青年文明号'、'中华餐饮名店'、全区'十佳旅游星级饭店'、全区'文明旅游饭店'、'宁夏餐饮名店'、'吴忠十大中餐名店'、'吴忠十大面食名店'等荣誉称号。",
+        comments: ["酒店设施很新，各方面都很好，据说刚改造过。整体卫生条件也不错。重点表扬一下服务特别好！我们8点多到，入住之后给了银耳汤，还提供了泡脚桶和热水，可以泡脚！真的惊喜，住了这么多酒店，第一次经历提供泡脚服务的！酒店地段也很好，旁边就是古城墙，附近餐饮也很多。而且酒店自己有餐饮，可以点餐吃饭，餐饮做的也还不错。我们一家有老人有孩子，总体环境很好，出行方便。酒店自带停车场，也方便停车。唯一不好就是没有电梯，拖着行李上下楼不方便。不过入住的时候服务员会帮忙拿行李，服务真的不错！", "酒店是盐池最好的酒店，服务员的服务绝对是五星标准，从停车开始引导去办入住到帮忙搬行李去房间，中秋当天房间布置的温馨并有欢迎月饼水果，大厅还有月饼水果自助，晚上服务员还送来泡脚水，餐厅的盐池滩羊肉及各种菜品也非常美味，值得五分推荐的酒店"]
+      },
+      "yanchi-fuhai": {
+        name: "盐池福海大酒店",
+        location: "盐池县花马池西街303号",
+        tags: ["高星级酒店", "商务会议", "滩羊美食"],
+        overview: "盐池福海大酒店是一家集住宿、餐饮、商务、会议、旅游等功能为一体的国家高星级旅游饭店，位于县城核心区域，位置优越，交通便利。",
+        introduction: "介绍：花马池就是盐池县在明代的名称。盐池福海大酒店是一家集住宿、餐饮、商务、会议、旅游等功能为一体的国家高星级旅游饭店。酒店位于盐池县花马池西街303号，北靠汽车站，南靠世纪广场商业街，距离高速公路入口便捷，地处县城核心区域，位置优越，交通便利。酒店主楼坐北向南共高八层，一层为酒店大厅，设有大堂吧、商务中心；二层为休闲区；三层为餐饮部；四--六层为客房部，分别有各类套房、豪华单间、豪华标间、三人间、亲子间等不同房型供您选择。酒店停车场可提供70多个车位免费停放，自驾游、旅游团队在这里更享自由、便利的出行服务。北楼为餐饮及会议中心，环境优雅，设施豪华，功能齐全，主题鲜明。有不同风格的餐饮雅间24间，不同类型的多功能厅6间，可一次性接待1500位宾客同时就餐。共有大中小型会议室6间，可以满足不同会议的需求。'人人都夸家乡好，长城脚下是我家……咸盐、皮毛、甜甘草，吃上一块滩羊肉，喝上一碗苦荞茶，亲人请留下……'。酒店距离明长城雄关中以'长城'命名的关隘——'长城关'和宁夏长城博物馆、盐池古城墙均方便快捷，是您在盐池旅游期间住宿、休闲、娱乐、观光的至佳选择。酒店坚持以优质的服务质量，诚信文明的行风标准，为宾客提供优质、细心、热情、周到的各类服务。",
+        comments: ["房间干净整洁，宽敞，设施齐全，性价比高，酒店停车方便，早餐自助餐也可以！服务热情，离高速口很近，外出吃饭也挺方便！", "新疆游玩返程的休息站，房价非常的优惠，酒店环境体验感也很好，早餐挺用心，豆浆是现磨的豆浆，不是豆浆粉兑的，点赞"]
+      },
+      "yanchi-junhao": {
+        name: "盐池君豪酒店",
+        location: "盐池县花马池西街北侧",
+        tags: ["智能化酒店", "商务酒店", "滩羊美食"],
+        overview: "盐池君豪酒店是按照国家星级标准投资建设的高端智能化商务酒店，地理位置优越，交通便利，是您在盐池旅游、出差期间的理想选择。",
+        introduction: "介绍：酒店位于盐池县花马池西街北侧，是按照国家星级标准投资建设的高端智能化商务酒店，拥有不同规格档次的客房。酒店每间客房都配有小度智能语音系统、智能门锁系统、智能灯光系统、网络电视、时尚家居等设施；酒店为宾客设置了免费停车位，花式多样的自助早餐，让您不论在盐池商务洽谈、会议接待、还是度假休闲都能感受到便捷热情，留下美好的回忆。 革命老区盐池县，地处长城脚下、滩羊之乡，宁夏东大门、三省交界处，花马池就是盐池县在明代的名称。酒店地理位置优越，交通便利。闲暇之余，可以在长城墙上散步，领略关外风情，品味正宗滩羊美食，是您在盐池旅游、出差期间住宿、休闲、娱乐、观光的理想选择。 我们的的服务宗旨是'服务只有起点、满意没有终点'。酒店将以热忱周到的服务笑迎八方来客，不断提升酒店品质，让每一位顾客感受到盐池的热情、体验到回家的温馨，乘兴而来，满意而归。",
+        comments: ["再次入住了，房型很大很规正，干净整洁，设施配套齐全。前台服务周到。纯净水是无限量供给。酒店位置也很好。高速出口500米。花马池西街也是盐池的重要街道。距古城和长城公园都不远。提个小建议，早餐可以供应羊肉汤面或羊杂之类的最好，来盐池就是吃滩羊的，早餐没有一点羊肉的影子。但总体还是好评！好评！", "酒店性价比非常高，房间很大，有洗衣房，很安静。从沙坡头玩好特意绕过来吃盐池羊肉，还顺便去看了粉色盐湖，附近吃羊肉的店很多。"]
+      },
+      "yanchi-xiaobang": {
+        name: "盐池潇邦酒店",
+        location: "盐池县",
+        tags: ["舒适住宿", "便捷出行", "滩羊美食"],
+        overview: "盐池潇邦酒店提供舒适的住宿环境，位置便利，适合自驾游客，周边餐饮选择丰富。",
+        introduction: "介绍：无",
+        comments: ["连续住了好几天，室内非常干净，干湿分离，床铺非常柔软，睡着好舒服，零食非常好吃！楼下有拉面馆，小卖部", "适合自驾，离高速口不远，门前有停车位，如停满马路对面有政府办事大厅的免费停车场。前台美女热情。房间干净又安静，乘电梯要刷房卡很放心。盐池的羊肉真的好吃！"]
+      },
+      "yanchi-xian": {
+        name: "盐池希岸酒店",
+        location: "盐池县",
+        tags: ["精品酒店", "宠爱文化", "贴心服务"],
+        overview: "希岸酒店是锦江酒店旗下一个定位为时尚轻者跨界精品的酒店品牌，以'小幸感，宠你开始'为核心价值主张，为宾客提供贴心服务。",
+        introduction: "介绍：希岸酒店是锦江酒店旗下一个定位为时尚轻者跨界精品的酒店品牌，以'小幸感，宠你开始'为核心价值主张，倡导旅途中的新生活态度，Xana life无论何时，出游何地，选择一个贴心、懂自己的休憩空间。酒店将宠爱文化渗透每个角落，从进门开始有专人提拉行李、迎接您的是热毛巾和特色花茶...有高颜值小哥哥小姐姐提供贴心的管家服务，带您感受独特的希岸味道；酒店同时还配备洗衣机、烘干机、健身房、浴缸等配套设施。为了将宠爱文化延伸，酒店推出了预定跟踪服务、营养早餐、预约接送...我们不为其他，只为将您狠狠宠爱，希望您在希岸的每一天，都是您美好的绽放。无论是出差、旅行、小憩，希岸酒店（盐池店）都是您的不二之选，我们诚挚期待您的光临。",
+        comments: ["酒店位置便利，毗邻地铁站，周边餐饮购物选择丰富。前台服务热情专业，办理入住高效。房间整洁宽敞，床品舒适度高，隔音效果不错保证了良好睡眠。浴室干湿分离，热水充足。早餐种类虽然不多但品质在线，尤其喜欢现煮咖啡。整体性价比很高，下次还会选择这里。", "房间很好，服务很好。天气冷，服务员很贴心的把银耳羹送到房间。对宠友好有爱。一行六人都非常满意，住宿体验很好。"]
+      }
+    };
+
+    function getQueryId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("id");
+    }
+
+    function getImageUrl(seed) {
+      return "https://picsum.photos/960/540?random=" + encodeURIComponent("yanchi-stay-" + seed);
+    }
+
+    const heroImage = document.getElementById("detail-hero-image");
+    const dotsContainer = document.getElementById("detail-dots");
+    const nameEl = document.getElementById("detail-name");
+    const locationEl = document.getElementById("detail-location");
+    const pageTitleMain = document.getElementById("page-title-main");
+    const pageTitleSub = document.getElementById("page-title-sub");
+    const breadcrumbsCurrent = document.getElementById("breadcrumbs-current");
+    const overviewEl = document.getElementById("detail-overview");
+    const introductionEl = document.getElementById("detail-introduction");
+    const commentsEl = document.getElementById("detail-comments");
+
+    let currentImages = [];
+    let currentImageIndex = 0;
+    let detailTimer = null;
+
+    function buildDots() {
+      dotsContainer.innerHTML = "";
+      currentImages.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.className = "detail-dot";
+        dot.type = "button";
+        dot.addEventListener("click", () => {
+          currentImageIndex = index;
+          updateHeroImage();
+          resetDetailTimer();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function updateHeroImage() {
+      const seed = currentImages[currentImageIndex];
+      heroImage.src = getImageUrl(seed);
+      Array.from(dotsContainer.children).forEach((dot, index) => {
+        if (index === currentImageIndex) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
+        }
+      });
+    }
+
+    function startDetailTimer() {
+      detailTimer = setInterval(() => {
+        currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+        updateHeroImage();
+      }, 5000);
+    }
+
+    function resetDetailTimer() {
+      if (detailTimer) {
+        clearInterval(detailTimer);
+      }
+      startDetailTimer();
+    }
+
+    function renderComments(comments) {
+      commentsEl.innerHTML = comments.map((comment, index) => `
+        <div class="comment-item">
+          <div class="comment-header">
+            <span class="comment-author">用户${index + 1}</span>
+            <span class="comment-rating">
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+            </span>
+          </div>
+          <div class="comment-content">${comment}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderDetail() {
+      const id = getQueryId();
+      const data = detailData[id] || detailData["yanchi-hotel"];
+      nameEl.textContent = data.name;
+      locationEl.textContent = data.location;
+      pageTitleMain.textContent = data.name;
+      pageTitleSub.textContent = "盐池特色住宿场所详细介绍";
+      breadcrumbsCurrent.textContent = data.name;
+      overviewEl.textContent = data.overview;
+      introductionEl.textContent = data.introduction;
+      renderComments(data.comments);
+
+      currentImages = [data.name + "-1", data.name + "-2", data.name + "-3"];
+      currentImageIndex = 0;
+      buildDots();
+      updateHeroImage();
+      startDetailTimer();
+    }
+
+    renderDetail();
+  </script>
+</body>
+</html>
