@@ -119,7 +119,16 @@
       }
     ];
 
-    function getCardImageUrl(index) {
+    function getCardImageUrl(item, index) {
+      if (item.id === "yanchi-chunxue") {
+        return "picture/春雪文化产业园/春雪1.jfif";
+      }
+      if (item.id === "yanchi-cultural") {
+        return "picture/盐池县文化馆/文化馆1.jfif";
+      }
+      if (item.id === "yanchi-greatwall-museum") {
+        return "picture/长城关博物馆/长城关1.jfif";
+      }
       const seed = "yanchi-card-" + index;
       return "https://picsum.photos/480/280?random=" + encodeURIComponent(seed);
     }
@@ -134,7 +143,7 @@
         const imageWrapper = document.createElement("div");
         imageWrapper.className = "card-image-wrapper";
         const img = document.createElement("img");
-        img.src = getCardImageUrl(index);
+        img.src = getCardImageUrl(item, index);
         img.alt = item.name;
         imageWrapper.appendChild(img);
 
