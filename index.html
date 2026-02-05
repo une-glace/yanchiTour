@@ -11,15 +11,15 @@
     <div class="site-title">
       <span class="site-title-main">盐池旅游导览</span>
       <span class="site-title-sub">你的盐池旅行小助手</span>
-    </div>
-    <div class="search-container">
-      <input type="text" class="search-input" id="search-input" placeholder="搜索景点、住宿...">
-      <button class="search-button" id="search-button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.35-4.35"></path>
-        </svg>
-      </button>
+      <div class="search-container">
+        <input type="text" class="search-input" id="search-input" placeholder="搜索景点、住宿...">
+        <button class="search-button" id="search-button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -300,6 +300,7 @@
     const searchButton = document.getElementById("search-button");
     const searchResultsSection = document.getElementById("search-results");
     const searchResultsList = document.getElementById("search-results-list");
+    const heroSection = document.querySelector(".hero-carousel");
 
     const database = [
       {
@@ -603,12 +604,18 @@
       const query = searchInput.value.trim();
       if (!query) {
         searchResultsSection.style.display = "none";
+        if (heroSection) {
+          heroSection.style.display = "block";
+        }
         return;
       }
 
       const results = bm25.search(query, 20);
       renderSearchResults(results);
       searchResultsSection.style.display = "block";
+      if (heroSection) {
+        heroSection.style.display = "none";
+      }
     }
 
     searchButton.addEventListener("click", performSearch);
@@ -622,6 +629,9 @@
     searchInput.addEventListener("input", () => {
       if (searchInput.value.trim() === "") {
         searchResultsSection.style.display = "none";
+        if (heroSection) {
+          heroSection.style.display = "block";
+        }
       }
     });
   </script>
