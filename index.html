@@ -300,6 +300,7 @@
     const searchButton = document.getElementById("search-button");
     const searchResultsSection = document.getElementById("search-results");
     const searchResultsList = document.getElementById("search-results-list");
+    const heroSection = document.querySelector(".hero-carousel");
 
     const database = [
       {
@@ -603,12 +604,18 @@
       const query = searchInput.value.trim();
       if (!query) {
         searchResultsSection.style.display = "none";
+        if (heroSection) {
+          heroSection.style.display = "block";
+        }
         return;
       }
 
       const results = bm25.search(query, 20);
       renderSearchResults(results);
       searchResultsSection.style.display = "block";
+      if (heroSection) {
+        heroSection.style.display = "none";
+      }
     }
 
     searchButton.addEventListener("click", performSearch);
@@ -622,6 +629,9 @@
     searchInput.addEventListener("input", () => {
       if (searchInput.value.trim() === "") {
         searchResultsSection.style.display = "none";
+        if (heroSection) {
+          heroSection.style.display = "block";
+        }
       }
     });
   </script>
