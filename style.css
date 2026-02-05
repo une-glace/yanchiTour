@@ -238,13 +238,17 @@ main {
 }
 
 .nav-icon {
-  width: 120px;
-  height: 104px;
+  width: 144px;
+  height: 125px;
   border-radius: 20px;
   background: linear-gradient(135deg, #4ade80, #22c55e);
   position: absolute;
   top: 24px;
   right: 24px;
+}
+
+.nav-icon-1 {
+  background: url("indexFig/Icon/景点.png") center/cover no-repeat;
 }
 
 .nav-icon::after {
@@ -256,11 +260,11 @@ main {
 }
 
 .nav-icon-2 {
-  background: linear-gradient(135deg, #fb923c, #f97316);
+  background: url("indexFig/Icon/美食.png") center/cover no-repeat;
 }
 
 .nav-icon-3 {
-  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  background: url("indexFig/Icon/住宿.png") center/cover no-repeat;
 }
 
 .nav-icon-4 {
@@ -268,7 +272,7 @@ main {
 }
 
 .nav-icon-5 {
-  background: linear-gradient(135deg, #f472b6, #ec4899);
+  background: url("indexFig/Icon/行程.png") center/cover no-repeat;
 }
 
 .item_title {
@@ -310,8 +314,8 @@ main {
 }
 
 .reason-img {
-  width: 80px;
-  height: 80px;
+  width: 160px;
+  height: 160px;
   border-radius: 18px;
   margin: 0 auto 12px;
   overflow: hidden;
@@ -426,6 +430,14 @@ main {
   justify-content: center;
   color: #6b7280;
   font-size: 11px;
+}
+
+.follow-qr img {
+  width: 110px;
+  height: 110px;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
 }
 
 .follow-name {
