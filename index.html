@@ -21,6 +21,8 @@
         <h1 id="hero-title">盐池的风光与人文气息</h1>
         <p id="hero-desc">从草原湿地到长城遗址，感受盐池独特的塞上魅力。</p>
       </div>
+      <button class="carousel-arrow carousel-arrow-left" id="hero-prev" type="button">&#8249;</button>
+      <button class="carousel-arrow carousel-arrow-right" id="hero-next" type="button">&#8250;</button>
     </div>
     <div class="hero-dots" id="hero-dots"></div>
   </section>
@@ -200,6 +202,8 @@
     const heroTitle = document.getElementById("hero-title");
     const heroDesc = document.getElementById("hero-desc");
     const heroDots = document.getElementById("hero-dots");
+    const heroPrev = document.getElementById("hero-prev");
+    const heroNext = document.getElementById("hero-next");
 
     let heroIndex = 0;
 
@@ -249,6 +253,18 @@
       }
       startHeroTimer();
     }
+
+    heroPrev.addEventListener("click", () => {
+      heroIndex = (heroIndex - 1 + heroData.length) % heroData.length;
+      updateHero();
+      resetHeroTimer();
+    });
+
+    heroNext.addEventListener("click", () => {
+      heroIndex = (heroIndex + 1) % heroData.length;
+      updateHero();
+      resetHeroTimer();
+    });
 
     buildHeroDots();
     updateHero();

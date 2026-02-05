@@ -156,6 +156,37 @@ main {
   transform: translateY(-1px);
 }
 
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(15, 23, 42, 0.45);
+  color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.carousel-arrow:hover {
+  background: rgba(15, 23, 42, 0.7);
+  transform: translateY(-50%) scale(1.04);
+}
+
+.carousel-arrow-left {
+  left: 16px;
+}
+
+.carousel-arrow-right {
+  right: 16px;
+}
+
 .section-title {
   font-size: 18px;
   font-weight: 600;
@@ -541,6 +572,7 @@ main {
 }
 
 .detail-carousel {
+  position: relative;
   border-radius: 20px;
   overflow: hidden;
   background: #111827;
@@ -583,10 +615,13 @@ main {
 }
 
 .detail-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 16px;
   display: flex;
   justify-content: center;
   gap: 8px;
-  padding: 10px 12px 13px;
 }
 
 .detail-dot {

@@ -31,6 +31,8 @@
             <h1 id="detail-name">景点名称</h1>
             <div class="detail-location" id="detail-location">位置</div>
           </div>
+          <button class="carousel-arrow carousel-arrow-left" id="detail-prev" type="button">&#8249;</button>
+          <button class="carousel-arrow carousel-arrow-right" id="detail-next" type="button">&#8250;</button>
         </div>
         <div class="detail-dots" id="detail-dots"></div>
       </div>
@@ -146,6 +148,8 @@
 
     const heroImage = document.getElementById("detail-hero-image");
     const dotsContainer = document.getElementById("detail-dots");
+    const detailPrev = document.getElementById("detail-prev");
+    const detailNext = document.getElementById("detail-next");
     const nameEl = document.getElementById("detail-name");
     const locationEl = document.getElementById("detail-location");
     const pageTitleMain = document.getElementById("page-title-main");
@@ -200,6 +204,20 @@
       }
       startDetailTimer();
     }
+
+    detailPrev.addEventListener("click", () => {
+      if (!currentImages.length) return;
+      currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+      updateHeroImage();
+      resetDetailTimer();
+    });
+
+    detailNext.addEventListener("click", () => {
+      if (!currentImages.length) return;
+      currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+      updateHeroImage();
+      resetDetailTimer();
+    });
 
     function renderDetail() {
       const id = getQueryId();
