@@ -32,8 +32,7 @@
   </main>
 
   <footer class="site-footer">
-    <div>盐池旅游导览 · 景点页面示例</div>
-    <div class="footer-sub">图片与内容均为示例占位，实际数据可后续替换</div>
+    <div>盐池旅游导览</div>
   </footer>
 
   <script>
@@ -60,6 +59,13 @@
         location: "盐池县盐州古城4A旅游景区",
         tags: ["长城文化", "博物馆", "历史遗迹"],
         summary: "以长城为主题内容的专题性博物馆，坐落于中国万里长城中唯一以'长城'而命名的关隘长城关脚下，现有东西两个展厅共4200平方米。走进展厅，一幅关于长城与盐池边关故事的立体画卷在观众面前徐徐展开。"
+      },
+      {
+        id: "yanchi-greatwall",
+        name: "盐池长城遗址群",
+        location: "盐池县境内长城沿线",
+        tags: ["长城文化", "历史遗迹"],
+        summary: "隋、明两代长城在这里叠加分布，残垣与烽火台勾勒出边塞防线的历史轮廓，是认识盐池边关历史与长城文化的重要户外课堂。"
       },
       {
         id: "yanchi-redmemorial",
@@ -92,6 +98,15 @@
     ];
 
     function getCardImageUrl(item, index) {
+      if (item.id === "yanchi-habahulake") {
+        return "picture/哈巴湖湿地公园/哈巴湖1.jfif";
+      }
+      if (item.id === "yanchi-greatwall") {
+        return "picture/盐池长城遗址群/长城遗址1.jpg";
+      }
+      if (item.id === "yanchi-redmemorial") {
+        return "picture/盐池革命历史纪念馆/革命1.jfif";
+      }
       if (item.id === "yanchi-chunxue") {
         return "picture/春雪文化产业园/春雪1.jfif";
       }
