@@ -800,6 +800,58 @@ main {
   color: #374151;
 }
 
+.detail-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment-item {
+  padding: 6px 0;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.comment-author-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comment-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  object-fit: cover;
+  display: block;
+}
+
+.comment-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.comment-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  color: #facc15;
+}
+
+.comment-content {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
 @media (max-width: 640px) {
   main {
     padding-inline: 12px;

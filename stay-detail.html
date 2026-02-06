@@ -185,7 +185,10 @@
       commentsEl.innerHTML = comments.map((comment, index) => `
         <div class="comment-item">
           <div class="comment-header">
-            <span class="comment-author">用户${index + 1}</span>
+            <div class="comment-author-wrap">
+              <img class="comment-avatar" src="foodFig/头像.png" alt="用户头像">
+              <span class="comment-author">用户${index + 1}</span>
+            </div>
             <span class="comment-rating">
               <i class="icon-star"></i>
               <i class="icon-star"></i>
