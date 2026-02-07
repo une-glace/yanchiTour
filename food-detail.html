@@ -9,8 +9,8 @@
 <body>
   <header class="site-header">
     <div class="site-title">
-      <span class="site-title-main">美食详情</span>
-      <span class="site-title-sub">盐池特色餐饮场所详细信息</span>
+      <span class="site-title-main" id="page-title-main">美食详情</span>
+      <span class="site-title-sub" id="page-title-sub">盐池特色餐饮场所详细信息</span>
     </div>
   </header>
 
@@ -20,22 +20,38 @@
       <span class="breadcrumbs-sep">/</span>
       <a href="food.html">美食</a>
       <span class="breadcrumbs-sep">/</span>
-      <span id="detail-title">详情</span>
+      <span id="breadcrumbs-current">详情</span>
     </section>
 
-    <section class="detail-container">
-      <div id="detail-content" class="detail-content">
-        <div class="loading-indicator">
-          <div class="spinner"></div>
-          <p>加载中...</p>
+    <section class="detail-hero">
+      <div class="detail-carousel">
+        <div class="detail-image-wrapper">
+          <img id="detail-hero-image" src="" alt="美食图片">
+          <div class="detail-hero-overlay">
+            <h1 id="detail-name">美食名称</h1>
+            <div class="detail-location" id="detail-location">位置</div>
+          </div>
+          <button class="carousel-arrow carousel-arrow-left" id="detail-prev" type="button">&#8249;</button>
+          <button class="carousel-arrow carousel-arrow-right" id="detail-next" type="button">&#8250;</button>
         </div>
+        <div class="detail-dots" id="detail-dots"></div>
+      </div>
+    </section>
+
+    <section class="detail-content">
+      <div class="detail-section">
+        <h2>特色美食</h2>
+        <p id="detail-introduction"></p>
+      </div>
+      <div class="detail-section">
+        <h2>用户评价</h2>
+        <div id="detail-comments"></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div>盐池旅游导览 · 美食详情页</div>
-    <div class="footer-sub">展示盐池特色餐饮场所详细信息</div>
+    <div>盐池旅游导览</div>
   </footer>
 
   <script>
@@ -61,7 +77,7 @@
         name: "海清大块羊肉",
         location: "盐池县",
         tags: ["手抓羊肉", "盐池羊肉", "特色美食"],
-        introduction: "特色美食：手抓羊肉，盐池羊肉，清炖羊肉，羊汤搓耳子，黑豆酸奶，烤羊排，羊肉汤，肝子凉皮，手抓羊肉及配料，地软炒鸡蛋",
+        introduction: "手抓羊肉，盐池羊肉，清炖羊肉，羊汤搓耳子，黑豆酸奶，烤羊排，羊肉汤，肝子凉皮，手抓羊肉及配料，地软炒鸡蛋",
         comments: ["手抓第一次选没经验有点瘦了，推荐肥瘦相间的，瘦的孩子吃着很好，一点味道都没有，我一个不吃羊肉的都吃不少。羊肝凉皮我强烈推荐，真的太太太太好了，今天返程我又打包了一份带走。胡麻油炒的土豆丝绝了，好吃到我今天买了一桶胡麻油带走[心心眼R]麻婆豆腐就那样，不好吃。建议点菜选择他们当地特色菜，融合菜做出来味道一般。", "盐池正宗，住的酒店工作人员员推荐的，去了要排队的羊肉，吃什么部位自己选，我们选了半个羊脖，肉很好，肝子凉皮也好吃，配上自带的陈醋，味道不错哦，还有，羊脖与竹叶青很配，记得点赞啊"]
       },
       "huianbao-lamb": {
@@ -69,7 +85,7 @@
         name: "惠安堡羊羔肉",
         location: "盐池县惠安堡镇",
         tags: ["羊羔肉", "特色美食", "地方名片"],
-        introduction: "特色美食：粉条烧肉，辣爆羊羔肉",
+        introduction: "粉条烧肉，辣爆羊羔肉",
         comments: ["来了就是直冲这家店的饭菜，真的yyds！惠安堡‼️为了吃正宗的滩羊肉，我们也是够费劲的啦！！去年也是今天来吃的这家，这次带家里人一起来吃～  惠安堡，他们本地人也来吃的饭店，外地人来一定一定要去尝尝阿～", "盐池惠安堡爆炒羊羔肉，已经是惠安堡的特色名片了，羊羔肉鲜嫩的口感更是恰到好处。今天吃的是自己家做的，用了自己家的羊，香香"]
       },
       "zaihuilou-mutton": {
@@ -77,7 +93,7 @@
         name: "再回楼羊肉馆",
         location: "盐池县",
         tags: ["手抓羊肉", "羊肉粘饭", "特色美食"],
-        introduction: "特色美食：手抓羊肉，羊肉粘饭",
+        introduction: "手抓羊肉，羊肉粘饭",
         comments: ["手把肉不膻不柴软烂可口，什么佐料都不用蘸，清口吃才能品味到滩羊的与众不同。另外，他们家的羊肉粘饭也非常好吃。", "第一天到的时候很晚了，但是他家居然排队点了一斤手抓，一份清炖，羊肉很嫩，很新鲜，一点不膻，洋芋擦擦也不错，第二天走的时候全家要求再吃一顿手抓，两斤手抓配个羊肉粘饭。 连吃两顿再出发。盐池的羊肉真的名不虚传。老板还热情的送了八宝茶。对'小服务员'帅哥印象很深！"]
       },
       "xizi-shouzhua": {
@@ -85,7 +101,7 @@
         name: "西子手抓美食城",
         location: "盐池县",
         tags: ["手抓肋条", "炝拌沙葱", "特色美食"],
-        introduction: "特色美食：手抓肋条，炝拌沙葱",
+        introduction: "手抓肋条，炝拌沙葱",
         comments: ["炝拌沙葱很有特色的当地菜~炝面饼一般，对比别家饼皮偏油，更像油饼而且一份太大了也没有半份真的吃不完整体味道值得期待，就是好多菜份量上不可调，即使我们一家三口也吃不下，部分菜品能推出半份就更好了~", "慕名来，味道是真好，盐池的羊肉肥而不腻鲜美无膻味，店家炖得火候也极好，入口软烂即化鲜香美味，确实是宁夏的一大招牌。一方水土养一方人，一种味道属此地独有，别的地方还真是做不出这个神韵。几十年的老店了， 生意好人特别多，基本上饭点儿总是满桌儿的， 不过流程管控好上菜还是蛮快的。就是名店老店了，价格不便宜，比当地别的店家稍高一点点吧..."]
       },
       "yuren-hotpot": {
@@ -93,99 +109,146 @@
         name: "愚人火锅（盐池店）",
         location: "盐池县",
         tags: ["滩羊卷", "脸盘滩羊肉", "特色火锅"],
-        introduction: "特色美食：极品滩羊卷，脸盘滩羊肉",
+        introduction: "极品滩羊卷，脸盘滩羊肉",
         comments: ["环境:环境挺好的，干干净净，很适合家庭聚会，朋友聚餐，今天就是和朋友一起来的。 真心推荐他家。菜品也很新鲜。", "锅底浓郁 味道不错 菜品新鲜 色香味俱全 酸梅汤酸酸好喝 肉质鲜嫩 口感很好 大家快来"]
       }
     };
 
-    function getDetailImageUrl(id) {
-      return "https://picsum.photos/800/400?random=" + encodeURIComponent(id);
+    function getQueryId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("id");
     }
 
-    function renderDetail(id) {
-      const data = detailData[id];
+    function getImageUrl(seed) {
+      return "https://picsum.photos/960/540?random=" + encodeURIComponent("yanchi-food-" + seed);
+    }
+
+    const heroImage = document.getElementById("detail-hero-image");
+    const dotsContainer = document.getElementById("detail-dots");
+    const detailPrev = document.getElementById("detail-prev");
+    const detailNext = document.getElementById("detail-next");
+    const nameEl = document.getElementById("detail-name");
+    const locationEl = document.getElementById("detail-location");
+    const pageTitleMain = document.getElementById("page-title-main");
+    const pageTitleSub = document.getElementById("page-title-sub");
+    const breadcrumbsCurrent = document.getElementById("breadcrumbs-current");
+    const introductionEl = document.getElementById("detail-introduction");
+    const commentsEl = document.getElementById("detail-comments");
+
+    let currentImages = [];
+    let currentImageIndex = 0;
+    let detailTimer = null;
+
+    function buildDots() {
+      dotsContainer.innerHTML = "";
+      currentImages.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.className = "detail-dot";
+        dot.type = "button";
+        dot.addEventListener("click", () => {
+          currentImageIndex = index;
+          updateHeroImage();
+          resetDetailTimer();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function updateHeroImage() {
+      if (!currentImages.length) return;
+      const seed = currentImages[currentImageIndex];
+      heroImage.src = getImageUrl(seed);
+      Array.from(dotsContainer.children).forEach((dot, index) => {
+        if (index === currentImageIndex) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
+        }
+      });
+    }
+
+    function startDetailTimer() {
+      if (!currentImages.length) return;
+      detailTimer = setInterval(() => {
+        currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+        updateHeroImage();
+      }, 5000);
+    }
+
+    function resetDetailTimer() {
+      if (detailTimer) {
+        clearInterval(detailTimer);
+      }
+      startDetailTimer();
+    }
+
+    detailPrev.addEventListener("click", () => {
+      if (!currentImages.length) return;
+      currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+      updateHeroImage();
+      resetDetailTimer();
+    });
+
+    detailNext.addEventListener("click", () => {
+      if (!currentImages.length) return;
+      currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+      updateHeroImage();
+      resetDetailTimer();
+    });
+
+    function renderComments(comments) {
+      commentsEl.innerHTML = comments.map((comment, index) => `
+        <div class="comment-item">
+          <div class="comment-header">
+            <div class="comment-author-wrap">
+              <img class="comment-avatar" src="foodFig/头像.png" alt="用户头像">
+              <span class="comment-author">用户${index + 1}</span>
+            </div>
+            <span class="comment-rating">
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+            </span>
+          </div>
+          <div class="comment-content">${comment}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderDetail() {
+      const id = getQueryId();
+      const data = detailData[id] || detailData["haiqing-mutton"];
+
       if (!data) {
-        document.getElementById("detail-content").innerHTML = `
+        const contentSection = document.querySelector(".detail-content");
+        contentSection.innerHTML = `
           <div class="error-message">
             <h2>未找到该餐饮场所信息</h2>
             <p>抱歉，无法找到您请求的餐饮场所详细信息。</p>
-            <a href="food.html" class="back-link">返回美食列表</a>
           </div>
         `;
         return;
       }
 
-      document.getElementById("detail-title").textContent = data.name;
+      nameEl.textContent = data.name;
+      locationEl.textContent = data.location;
+      pageTitleMain.textContent = data.name;
+      pageTitleSub.textContent = "盐池特色美食详细信息";
+      breadcrumbsCurrent.textContent = data.name;
+      introductionEl.textContent = data.introduction;
+      renderComments(data.comments);
 
-      const content = `
-        <div class="detail-header">
-          <div class="detail-image">
-            <img src="${getDetailImageUrl(data.id)}" alt="${data.name}">
-          </div>
-          <div class="detail-info">
-            <h1 class="detail-name">${data.name}</h1>
-            <div class="detail-location">
-              <i class="icon-location"></i>
-              <span>${data.location}</span>
-            </div>
-            <div class="detail-tags">
-              ${data.tags.map(tag => `<span class="detail-tag">${tag}</span>`).join('')}
-            </div>
-          </div>
-        </div>
-
-        <div class="detail-section">
-          <h2 class="section-title">场所介绍</h2>
-          <div class="detail-intro">${data.introduction}</div>
-        </div>
-
-        <div class="detail-section">
-          <h2 class="section-title">用户评价</h2>
-          <div class="detail-comments">
-            ${data.comments.map((comment, index) => `
-              <div class="comment-item">
-                <div class="comment-header">
-                  <span class="comment-author">用户${index + 1}</span>
-                  <span class="comment-rating">
-                    <i class="icon-star"></i>
-                    <i class="icon-star"></i>
-                    <i class="icon-star"></i>
-                    <i class="icon-star"></i>
-                    <i class="icon-star"></i>
-                  </span>
-                </div>
-                <div class="comment-content">${comment}</div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-
-        <div class="detail-actions">
-          <a href="food.html" class="back-link">返回美食列表</a>
-        </div>
-      `;
-
-      document.getElementById("detail-content").innerHTML = content;
-    }
-
-    function getUrlParam(name) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(name);
+      currentImages = [data.id + "-1", data.id + "-2", data.id + "-3"];
+      currentImageIndex = 0;
+      buildDots();
+      updateHeroImage();
+      startDetailTimer();
     }
 
     window.addEventListener("DOMContentLoaded", () => {
-      const id = getUrlParam("id");
-      if (id) {
-        renderDetail(id);
-      } else {
-        document.getElementById("detail-content").innerHTML = `
-          <div class="error-message">
-            <h2>缺少参数</h2>
-            <p>请从美食列表页面进入详情页。</p>
-            <a href="food.html" class="back-link">返回美食列表</a>
-          </div>
-        `;
-      }
+      renderDetail();
     });
   </script>
 </body>
