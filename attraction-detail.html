@@ -56,6 +56,52 @@
         <p id="detail-feature"></p>
       </div>
     </section>
+
+    <section class="reviews-section">
+      <div class="reviews-container">
+        <h2>游客评价</h2>
+        
+        <!-- 评价表单 -->
+        <div class="review-form">
+          <h3>添加您的评价</h3>
+          <form id="review-form">
+            <div class="form-group">
+              <label for="review-name">您的昵称</label>
+              <input type="text" id="review-name" required placeholder="请输入您的昵称">
+            </div>
+            <div class="form-group">
+              <label for="review-rating">评分</label>
+              <div class="rating-input">
+                <input type="radio" id="rating-5" name="rating" value="5" required>
+                <label for="rating-5">★</label>
+                <input type="radio" id="rating-4" name="rating" value="4">
+                <label for="rating-4">★</label>
+                <input type="radio" id="rating-3" name="rating" value="3">
+                <label for="rating-3">★</label>
+                <input type="radio" id="rating-2" name="rating" value="2">
+                <label for="rating-2">★</label>
+                <input type="radio" id="rating-1" name="rating" value="1">
+                <label for="rating-1">★</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="review-comment">评价内容</label>
+              <textarea id="review-comment" rows="4" required placeholder="请分享您的体验..."></textarea>
+            </div>
+            <button type="submit" class="submit-review-btn">提交评价</button>
+          </form>
+        </div>
+        
+        <!-- 评价列表 -->
+        <div class="reviews-list" id="reviews-list">
+          <h3>评价列表</h3>
+          <div class="no-reviews" id="no-reviews">
+            暂无评价，快来添加第一条评价吧！
+          </div>
+          <!-- 评价将通过JavaScript动态添加 -->
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -278,6 +324,129 @@
     }
 
     renderDetail();
+
+    // 评价功能
+    const reviewForm = document.getElementById('review-form');
+    const reviewsList = document.getElementById('reviews-list');
+    const noReviews = document.getElementById('no-reviews');
+
+    // 获取当前景点ID
+    const currentAttractionId = getQueryId();
+
+    // 加载评价
+    function loadReviews() {
+      try {
+        const reviews = JSON.parse(localStorage.getItem('attractionReviews') || '{}');
+        const attractionReviews = reviews[currentAttractionId] || [];
+        
+        if (attractionReviews.length === 0) {
+          noReviews.style.display = 'block';
+          return;
+        }
+        
+        noReviews.style.display = 'none';
+        
+        // 清空现有评价
+        while (reviewsList.children.length > 1) { // 保留h3标题
+          reviewsList.removeChild(reviewsList.lastChild);
+        }
+        
+        // 按时间倒序排列
+        attractionReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        
+        // 显示评价
+        attractionReviews.forEach(review => {
+          const reviewItem = document.createElement('div');
+          reviewItem.className = 'review-item';
+          
+          const reviewHeader = document.createElement('div');
+          reviewHeader.className = 'review-header';
+          
+          const reviewName = document.createElement('span');
+          reviewName.className = 'review-name';
+          reviewName.textContent = review.name;
+          
+          const reviewRating = document.createElement('div');
+          reviewRating.className = 'review-rating';
+          for (let i = 0; i < 5; i++) {
+            const star = document.createElement('span');
+            star.className = 'star';
+            star.textContent = '★';
+            star.style.color = i < review.rating ? '#ffd700' : '#ddd';
+            reviewRating.appendChild(star);
+          }
+          
+          const reviewDate = document.createElement('span');
+          reviewDate.className = 'review-date';
+          reviewDate.textContent = new Date(review.timestamp).toLocaleString('zh-CN');
+          
+          const reviewComment = document.createElement('div');
+          reviewComment.className = 'review-comment';
+          reviewComment.textContent = review.comment;
+          
+          reviewHeader.appendChild(reviewName);
+          reviewHeader.appendChild(reviewRating);
+          reviewHeader.appendChild(reviewDate);
+          
+          reviewItem.appendChild(reviewHeader);
+          reviewItem.appendChild(reviewComment);
+          reviewsList.appendChild(reviewItem);
+        });
+      } catch (error) {
+        console.error('加载评价失败:', error);
+      }
+    }
+
+    // 保存评价
+    function saveReview(review) {
+      try {
+        const reviews = JSON.parse(localStorage.getItem('attractionReviews') || '{}');
+        
+        if (!reviews[currentAttractionId]) {
+          reviews[currentAttractionId] = [];
+        }
+        
+        reviews[currentAttractionId].push(review);
+        localStorage.setItem('attractionReviews', JSON.stringify(reviews));
+        return true;
+      } catch (error) {
+        console.error('保存评价失败:', error);
+        return false;
+      }
+    }
+
+    // 提交评价
+    if (reviewForm) {
+      reviewForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('review-name').value;
+        const rating = parseInt(document.querySelector('input[name="rating"]:checked').value);
+        const comment = document.getElementById('review-comment').value;
+        
+        const review = {
+          id: Date.now().toString(),
+          name: name,
+          rating: rating,
+          comment: comment,
+          timestamp: new Date().toISOString()
+        };
+        
+        if (saveReview(review)) {
+          // 重置表单
+          reviewForm.reset();
+          // 重新加载评价
+          loadReviews();
+          // 显示成功消息
+          alert('评价提交成功！');
+        } else {
+          alert('评价提交失败，请重试。');
+        }
+      });
+    }
+
+    // 初始加载评价
+    loadReviews();
   </script>
 </body>
 </html>
