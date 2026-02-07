@@ -108,19 +108,17 @@
         location: "盐池县盐州古城4A旅游景区",
         tags: ["长城文化", "博物馆", "历史遗迹"],
         summary: "以长城为主题内容的专题性博物馆，坐落于中国万里长城中唯一以'长城'而命名的关隘长城关脚下，现有东西两个展厅共4200平方米。"
+      },
+      {
+        id: "yanchi-zhangjiachang",
+        name: "张家场博物馆",
+        location: "宁夏盐池县",
+        tags: ["秦汉文化", "考古遗址", "历史博物馆"],
+        summary: "为保护张家场古城遗址而建，与宁夏文物考古研究所、北京大学考古文博学院合作设立考古研究基地，馆藏文物1201件/套，展览内容涵盖秦汉时期宁夏古城文化、昫衍县历史及民风民俗。"
       }
     ];
 
     function getCardImageUrl(item, index) {
-      if (item.id === "yanchi-habahulake") {
-        return "picture/哈巴湖湿地公园/哈巴湖1.jfif";
-      }
-      if (item.id === "yanchi-greatwall") {
-        return "picture/盐池长城遗址群/长城遗址1.jpg";
-      }
-      if (item.id === "yanchi-redmemorial") {
-        return "picture/盐池革命历史纪念馆/革命1.jfif";
-      }
       if (item.id === "yanchi-chunxue") {
         return "picture/春雪文化产业园/春雪1.jfif";
       }
@@ -134,10 +132,16 @@
         return "picture/哈巴湖湿地公园/哈巴湖1.jfif";
       }
       if (item.id === "yanchi-greatwall") {
-        return "picture/盐池长城遗址群/长城遗址1.jfif";
+        return "picture/盐池长城遗址群/长城遗址1.jpg";
       }
       if (item.id === "yanchi-redmemorial") {
         return "picture/盐池革命历史纪念馆/革命1.jfif";
+      }
+      if (item.id === "yanchi-yueerquan") {
+        return "picture/月儿泉村河谷/月儿1.webp";
+      }
+      if (item.id === "yanchi-zhangjiachang") {
+        return "picture/张家场博物馆/张家场1.jfif";
       }
       const seed = "yanchi-card-" + index;
       return "https://picsum.photos/480/280?random=" + encodeURIComponent(seed);
