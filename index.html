@@ -216,22 +216,22 @@
       {
         title: "晨光里的哈巴湖湿地",
         desc: "清晨薄雾轻拂水面，候鸟掠过草甸与湖泊，盐池的柔和一面在这里铺展开来。",
-        seed: "yanchi-habahulake-morning"
+        imageUrl: "picture/首页展示/哈巴湖清晨.jpg"
       },
       {
-        title: "傍晚滩羊小镇灯火",
-        desc: "夕阳映照街巷与屋顶，烤全羊的香气伴着灯光升起，是盐池最具烟火气的一刻。",
-        seed: "yanchi-town-sunset"
+        title: "张家场古城的千年余晖",
+        desc: "夕阳为夯土城墙染上铜色，遍地陶片、瓦当与斑驳钱币在斜照中低语，齿轮与箭镞静卧荒草，默述着汉代边塞的繁华与沧桑。",
+        imageUrl: "picture/首页展示/张家场.jpg"
       },
       {
         title: "长城遗址上的星空",
         desc: "在寂静的长城烽火台附近仰望夜空，古老城墙与银河交织出独特的时间感。",
-        seed: "yanchi-greatwall-stars"
+        imageUrl: "picture/首页展示/长城遗址星空.jpg"
       },
       {
         title: "月儿泉村的古堡与河谷",
         desc: "沿着河谷散步，古堡、村庄与水草相映成趣，展现盐池兼具历史与自然的风貌。",
-        seed: "yanchi-yueerquan-valley"
+        imageUrl: "picture/首页展示/月儿泉村河谷.webp"
       }
     ];
 
@@ -261,8 +261,7 @@
 
     function updateHero() {
       const item = heroData[heroIndex];
-      const url = "https://picsum.photos/1200/520?random=" + encodeURIComponent(item.seed);
-      heroImage.src = url;
+      heroImage.src = item.imageUrl;
       heroTitle.textContent = item.title;
       heroDesc.textContent = item.desc;
 
